@@ -1,5 +1,8 @@
 # iBanFirst
-1.	Installation
+1.	Installation<br><br>
+Open an umulator console (git bach or cmder ....)
+in the directory where you will install the project
+
 
 After making the project clone <br>
 git clone https://github.com/mhaahm/iBanFirst.git <br>
