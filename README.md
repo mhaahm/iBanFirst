@@ -1,8 +1,7 @@
 # iBanFirst
-1.	Installation<br><br>
+1.Installation <br>
 Open an umulator console (git bach or cmder ....)
 in the directory where you will install the project
-
 
 After making the project clone <br>
 git clone https://github.com/mhaahm/iBanFirst.git <br>
@@ -11,5 +10,5 @@ git clone https://github.com/mhaahm/iBanFirst.git <br>
 •	If not: <br>
       php composer.phar install
 
-2.	Configuration
+2.Configuration
 
