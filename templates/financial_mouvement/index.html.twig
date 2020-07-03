@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'iBanFirst Financial Mouvment'|trans }}{% endblock %}
+
+{% block body %}
+    <div class="d-none content-nav mb-1 bgc-grey-l4">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="nav-search">
+                <form class="form-search">
+                  <span class="d-inline-flex align-items-center">
+                           <input type="text" placeholder="Search ..." class="form-control pr-4 form-control-sm radius-1 brc-info-m2 text-grey" autocomplete="off" />
+                           <i class="fa fa-search text-info-m1 ml-n4"></i>
+                       </span>
+                </form>
+            </div><!-- /.nav-search -->
+        </div>
+    </div><!-- breadcrumbs -->
+
+    <div class="page-content container">
+        <div class="page-header">
+            <h1 class="page-title text-primary-d2">
+                {{ "Financial Mouvement List"|trans }} <small> <a href="{{ path('wallets') }}" class="btn btn-primary">{{ "Return to wallets List" }}</a></small>
+            </h1>
+        </div>
+
+        <div id="table-toolbar">
+
+        </div>
+
+        <div class="bgc-primary-d1 text-white px-3 py-25">
+            <span class="text-90">{{ "Total number of wallets"|trans }} {{ financialMouvments|length }}</span>
+        </div>
+
+        <table class="table text-dark-m2 text-95 table-bordered table-hover" id="table"
+               data-toggle="table"
+               data-search="true"
+               data-show-refresh="true"
+               data-show-toggle="true"
+               data-show-fullscreen="true"
+               data-show-columns="true"
+               data-show-columns-toggle-all="true"
+               data-click-to-select="true"
+               data-detail-formatter="detailFormatter"
+               data-minimum-count-columns="2"
+               data-show-pagination-switch="true"
+               data-pagination="true"
+               data-id-field="id"
+               data-page-list="[10, 25, 50, 100, all]"
+               data-show-footer="true">
+            <thead>
+            <tr class="table-row">
+                <th rowspan="2">{{ 'ID'|trans }}</th>
+                <th rowspan="2">{{ 'Wallet ID'|trans }}</th>
+                <th rowspan="2">{{ 'Booking Date'|trans }}</th>
+                <th rowspan="2">{{ 'Value Date'|trans }}</th>
+                <th colspan="3">{{ 'Amount'|trans }}</th>
+                <th rowspan="2">{{ 'Description'|trans }}</th>
+            </tr>
+            <tr class="table-row">
+                <th>{{ 'Real Value'|trans }}</th>
+                <th>{{ 'Real Currency'|trans }}</th>
+                <th>{{ 'Converted Value'|trans }} ({{ uniqueCurrency() }})</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for financialMouvment in financialMouvments %}
+                <tr class="table-row">
+                    <td>{{ financialMouvment.id }}</td>
+                    <td>{{  financialMouvment.wallet.id |default('')}}</td>
+                    <td>{{ financialMouvment.bookingDate|date('Y-m-d h:i:s') }}</td>
+                    <td>{{ financialMouvment.valueDate|date('Y-m-d h:i:s') }}</td>
+                    <td>{{ financialMouvment.amount.value|price }}</td>
+                    <td>{{ financialMouvment.amount.currency }}</td>
+                    <td>{{ financialMouvment.amount.uniqValue|price }}</td>
+                    <td>{{ financialMouvment.description }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div><!-- /.page-content -->
+{% endblock %}
+

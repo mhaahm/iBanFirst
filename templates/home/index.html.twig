@@ -1,0 +1,275 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}iBanFirst Home{% endblock %}
+
+{% block body %}
+
+            <div class="page-content container">
+                <div class="page-header">
+                    <h1 class="page-title text-primary-d2">
+                        {{ "Financial Movements Dashboard"|trans }}
+                    </h1>
+                </div>
+                {% if statsData == null %}
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="alert alert-danger">{{ 'No data returned from server !!!! check the network communication'|trans }}</div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="row">
+                    <div class="col-lg-7">
+                        <div class="row card border-0 h-100">
+                            <div class="card-header border-0 bgc-primary-d1 card-header-sm">
+                                <h6 class="card-title pt-0">
+                                    <i class="mr-1 fa fa-signal text-white-tp2"></i>
+                                    <span class="text-110 text-white">{{ 'Amount Distribution'|trans }}</span>
+                                </h6>
+                            </div>
+                            <div class="col-12 mb1-25 card-body">
+                                <div class="row  h-100 l5 border-2 border-b-0 bgc-white brc-default-l2 radius-t-1 d-flex py-35">
+                                    {% set positifBookingAmout = statsData['total_booking'] > 0 %}
+                                    <div class="col-12 col-sm-4 px-lg-4 text-center text-{{ positifBookingAmout >0 ?'success':'danger' }}-m2">
+                                        <span class="text-95">{{ 'Booking Amount'|trans }}</span>
+                                        <div class="text-secondary-d3 text-{{ positifBookingAmout ? 'success':'danger' }}-m2">
+                                            <span class="text-180"> {{ uniqueCurrency() }}{{ statsData['total_booking']|price }}</span>
+                                            <i class="fa fa-caret-{{ positifBookingAmout ? 'up':'down' }}"></i></span>
+                                        </div>
+                                        <br>
+                                        <div class="align-self-center w-95 text-warning-d2">
+                                            <canvas class="info-chart ml-n15 mt-n2" style="height: 64px; width: 100%;" data-values="[{{ statsData['amount_booking_by_date']|join(',') }}]" data-xaxis="[{{ statsData['amount_booking_by_date']|keys|join(',') }}]"></canvas>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-4 px-4 pos-rel mt-3 mt-sm-0 pt-3 pt-sm-0 text-center">
+
+                                        <div class="d-none d-sm-block position-lc h-90 border-l-1 brc-default-l1"></div>
+                                        <div class="d-sm-none position-tc w-90 border-t-1 brc-default-l1"></div>
+                                        {% set positifValueAmout = statsData['total_value'] > 0 %}
+                                        <div class="d-flex flex-column">
+                                            <div class="d-flex text-center text-{{ positifBookingAmout >0 ?'success':'danger' }}-m2">
+                                                <div class="flex-grow-1 mb-3">
+                                                    <div class="text-nowrap text-95">{{ 'Value Amount'|trans }}</div>
+                                                    <div>
+                                                        <span class="text-170 text-{{ positifValueAmout ? 'success':'danger' }}-d2"><span class="text-110">{{ uniqueCurrency() }}</span>{{ statsData['total_value']|price }}</span>
+                                                        <i class="fa fa-caret-{{ positifValueAmout ? 'up':'down' }}"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="align-self-center w-95 text-warning-d2">
+                                                <canvas class="info-chart ml-n15 mt-n2" style="height: 64px; width: 100%;" data-values="[{{ statsData['value_amount_by_date']|join(',') }}]" data-xaxis="[{{ statsData['value_amount_by_date']|keys|join(',') }}]"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-4 px-4 pos-rel mt-3 mt-sm-0 pt-3 pt-sm-0 text-center">
+                                        <div class="d-none d-sm-block position-lc h-90 border-l-1 brc-default-l1"></div>
+                                        <div class="d-sm-none position-tc w-90 border-t-1 brc-default-l1"></div>
+                                        {% set positifMouvmentAmout = statsData['total_mouvment'] > 0 %}
+                                        <div class="d-flex flex-column">
+                                            <div class="d-flex text-center text-{{ positifMouvmentAmout >0 ?'success':'danger' }}-m2">
+                                                <div class="flex-grow-1 mb-3">
+                                                    <div class="text-nowrap text-95">{{ 'Total Mouvment Amount'|trans  }}</div>
+                                                    <div>
+                                                        <span class="text-170 text-{{ positifMouvmentAmout ? 'success':'danger' }}-d2"><span class="text-110">{{ uniqueCurrency() }}</span>{{ statsData['total_mouvment']|price }}</span>
+                                                        <i class="fa fa-caret-{{ positifMouvmentAmout ? 'up':'down' }}"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="align-self-center w-95 text-warning-d2">
+                                                <canvas class="info-chart ml-n15 mt-n2" style="height: 64px; width: 100%;" data-values="[{{ statsData['mouvment_amount_by_date']|join(',') }}]" data-xaxis="[{{ statsData['mouvment_amount_by_date']|keys|join(',') }}]"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 mt-4 mt-lg-0">
+                        <div class="card border-0 h-100">
+                            <div class="card-header border-0 bgc-primary-d1 card-header-sm">
+                                <h6 class="card-title pt-0">
+                                    <i class="mr-1 fa fa-signal text-white-tp2"></i>
+                                    <span class="text-110 text-white">{{ 'Finantial mouvment per year'|trans }}</span>
+                                </h6>
+                            </div>
+                            <div class="card-body px-0 bgc-white border-2 border-t-0 brc-primary-m4 pb-0 flex-grow-1 d-flex flex-column">
+                                <div class="flex-grow-1 d-flex align-items-center px-2">
+                                    <canvas class="mw-100" id="piechart" height="110" data-values="{{ statsData['value_nb_by_date']|join(',') }}" data-xaxis="{{ statsData['value_nb_by_date']|keys|join(',') }}"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+{% endif %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        jQuery(function($) {
+            if (!('ontouchstart' in window)) $('[data-toggle="tooltip"]').tooltip({
+                container: 'body'
+            });
+            var _animate = !AceApp.Util.isReducedMotion(); //make sure no animation is displayed according to user preferences
+            //the traffic sources pie chart
+            var config = {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        label: 'Traffic Sources',
+                        data: $("#piechart").data('values').split(','),
+                        backgroundColor: [
+                            "#6dbb6d",
+                            "#4697ca",
+                            "#e5758f",
+                            "#a072b9",
+                            "#fee074"
+                        ],
+                    }],
+                    labels: $("#piechart").data('xaxis').split(',')
+                },
+
+                options: {
+                    responsive: true,
+                    cutoutPercentage: 50,
+                    legend: {
+                        display: true,
+                        position: 'right',
+                        labels: {
+                            usePointStyle: true
+                        }
+                    },
+                    animation: {
+                        animateRotate: true,
+                        duration: _animate ? 1000 : false
+                    },
+                    tooltips: {
+                        enabled: true,
+                        cornerRadius: 0,
+                        bodyFontColor: '#fff',
+                        bodyFontSize: 14,
+                        fontStyle: 'bold',
+                        backgroundColor: 'rgba(34, 34, 34, 0.73)',
+                        borderWidth: 0,
+                        caretSize: 5,
+                        xPadding: 12,
+                        yPadding: 12,
+                        callbacks: {
+                            label: function(tooltipItem, data) {
+                                var label = data.labels[tooltipItem.index];
+                                return ' ' + label + ": " + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                            }
+                        }
+                    }
+                }
+            };
+            new Chart(document.getElementById('piechart'), config);
+
+            $('canvas.info-chart').each(function() {
+                var ctx = this.getContext('2d');
+                var gradientbg = ctx.createLinearGradient(0, 0, 0, 50);
+                gradientbg.addColorStop(0, 'rgba(109, 187, 109, 0.25)');
+                gradientbg.addColorStop(1, 'rgba(109, 187, 109, 0.05)');
+                var labels = $(this).data('xaxis').split(',');
+                new Chart(ctx, {
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                type: 'line',
+                                data: $(this).data('values'),
+                                backgroundColor: gradientbg,
+                                hoverBackgroundColor: '#70bcd9',
+                                fill: true,
+
+                                borderColor: 'rgba(109, 187, 109, 0.6)',
+
+                                borderWidth: 2.5,
+                                pointRadius: 7,
+                                lineTension: 0.4,
+
+                                pointBackgroundColor: 'transparent',
+                                pointBorderColor: 'transparent'
+                            },
+                        ]
+                    },
+
+                    options: {
+                        responsive: false,
+                        animation: {
+                            duration: _animate ? 1000 : false
+                        },
+
+                        legend: {
+                            display: false
+                        },
+                        layout: {
+                            padding: {
+                                left: 10,
+                                right: 10,
+                                top: 0,
+                                bottom: -10
+                            }
+                        },
+                        scales: {
+                            yAxes: [{
+                                stacked: true,
+                                ticks: {
+                                    display: false,
+                                    beginAtZero: true,
+                                },
+                                gridLines: {
+                                    display: false,
+                                    drawBorder: false
+                                }
+                            }],
+
+                            xAxes: [{
+                                stacked: true,
+                                gridLines: {
+                                    display: false,
+                                    drawBorder: false
+                                },
+                                ticks: {
+                                    display: false
+                                }
+                            }, ]
+                        }, //scales
+
+                        tooltips: {
+                            // Disable the on-canvas tooltip, because canvas area is small and tooltips will be cut (clipped)
+                            enabled: false,
+
+                            //use bootstrap tooltip instead
+                            custom: function(tooltipModel) {
+                                var title = '';
+                                var canvas = this._chart.canvas;
+
+                                if (tooltipModel.body) {
+                                    title = tooltipModel.title[0] + ': ' + Number(tooltipModel.body[0].lines[0]).toLocaleString();
+                                }
+                                canvas.setAttribute('data-original-title', title); //will be used by bootstrap tooltip
+
+                                $(canvas)
+                                    .tooltip({
+                                        placement: 'bottom',
+                                        template: '<div class="tooltip" role="tooltip"><div class="brc-info arrow"></div><div class="bgc-info tooltip-inner font-bolder text-110"></div></div>'
+                                    })
+                                    .tooltip('show')
+                                    .on('hidden.bs.tooltip', function() {
+                                        canvas.setAttribute('data-original-title', ''); //so that when mouse is back over canvas's blank area, no tooltip is shown
+                                    });
+
+                            }
+                        } //tooltips
+
+                    }
+                });
+
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/fontawesome.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/regular.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/brands.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/solid.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-table.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/ace.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/ace-themes.min.css') }}">
+    {% endblock %}
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/favicon.a145d6616e58.ico') }}">
+</head>
+<body>
+<div class="body-container">
+    <nav class="navbar navbar-sm navbar-fixed-sm navbar-expand-lg navbar-fixed navbar-white2">
+        <div class="navbar-inner">
+            <div class="container container-plus">
+
+                <div class="navbar-intro justify-content-xl-start bg-transparent border-0 w-auto mr-lg-3">
+
+                    <button type="button"
+                            class="btn burger-arrowed static collapsed ml-2 d-flex d-xl-none btn-h-white btn-burger"
+                            data-toggle-mobile="sidebar" data-target="#sidebar" aria-controls="sidebar"
+                            aria-expanded="false" aria-label="Toggle sidebar">
+                        <span class="bars bgc-dark-tp3"></span>
+                    </button>
+
+                    <button type="button"
+                            class="btn burger-compact btn-burger align-self-center ml-2 d-none d-xl-flex btn-h-light-primary"
+                            data-toggle="sidebar" data-toggle-class="collapsed-h" data-target="#sidebar"
+                            aria-controls="sidebar" aria-expanded="true" aria-label="Toggle sidebar">
+                        <span class="bars bgc-dark-tp3"></span>
+                    </button>
+
+                    <img class="ibanLogo" src="{{ asset('img/logo.png') }}" alt="iBanFirst">
+
+                </div>
+
+                <!-- mobile #navbarMenu toggler button -->
+                <button class="navbar-toggler ml-1 mr-2 px-1" type="button" data-toggle="collapse"
+                        data-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false"
+                        aria-label="Toggle navbar menu">
+              <span class="pos-rel">
+                  <img class="radius-3px mr-1 brc-grey-m2 border-1" width="36" src="{{ asset('img/logo.png') }}"
+                       alt="iBanFirst">
+                  <span class="bgc-warning radius-round border-2 brc-white p-1 position-tr mr-1px mt-n15"></span>
+              </span>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <div id="sidebar" class="sidebar sidebar-fixed sidebar-hover sidebar-h sidebar-white sidebar-top" data-swipe="true"
+         data-backdrop="true" data-dismiss="true">
+        <div class="sidebar-inner border-r-0 border-b-1 brc-primary-l1 shadow-md invisible">
+            <div class="container container-plus px-0 d-flex flex-column flex-xl-row">
+
+                <div class="flex-grow-1 d-xl-flex flex-xl-row ace-scroll" ace-scroll>
+                    <div class="sidebar-section">
+                        <div class="sidebar-section-item fadeable-below fadeable-center px-3">
+
+                            <div class="fadeinable sidebar-shortcuts-mini flex-column justify-content-center w-auto mt-xl-n1 c-pointer">
+                                <div class="h-2">
+                                    <span class="btn btn-success p-0"></span><span class="btn btn-info p-0"></span>
+                                </div>
+                                <div class="h-3">
+                                    <span class="btn btn-info p-0"></span><span class="btn btn-success p-0"></span>
+                                </div>
+                            </div>
+
+                            <div class="fadeable flex-xl-column text-center">
+                                <div class="sub-arrow"></div>
+                                <div class="my-3">
+                                    <a class="btn btn-smd btn-outline-success border-b-2 radius-2" title="Export excel" href="{{ path('export_excel') }}" target="_blank">
+                                        <i class="fa fa-file-excel"></i>
+                                    </a>
+
+                                    <button class="btn btn-smd btn-outline-info border-b-2 radius-2" title="Configuration">
+                                        <i class="fa fa-cogs"></i>
+                                    </button>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="nav nav-spaced nav-fill text-center nav-active-sm has-active-border active-on-top"
+                         role="navigation" aria-label="Main">
+
+
+                        <li class="nav-item-caption">
+                            <span class="fadeable pl-3">MAIN</span>
+                            <span class="fadeinable mt-n2 text-125">&hellip;</span>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a href="{{ path("home") }}" class="nav-link">
+                                <i class="nav-icon fa fa-tachometer-alt"></i>
+                                <span class="nav-text fadeable">
+                	                    <span>Dashboard</span>
+                                    </span>
+                            </a>
+                            <b class="sub-arrow"></b>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a href="{{ path("wallets") }}" class="nav-link">
+                                <i class="nav-icon fa fa-table"></i>
+                                <span class="nav-text fadeable">
+                	                <span>{{ 'Wallets'|trans }}</span>
+                                </span>
+                                <b class="caret fa fa-angle-left rt-n90"></b>
+                            </a>
+                            <b class="sub-arrow"></b>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ path('financial_mouvement') }}" class="nav-link">
+                                <i class="nav-icon far fa-calendar-alt"></i>
+                                <span class="nav-text fadeable">
+                	                <span>{{ 'Financial Mouvement'|trans }}</span>
+                                </span>
+                                <b class="caret fa fa-angle-left rt-n90"></b>
+                            </a>
+                            <b class="sub-arrow"></b>
+                        </li>
+
+                    </div>
+                </div>
+
+
+                <div class="sidebar-section d-xl-none ml-xl-auto">
+                    <div class="sidebar-section-item fadeable-bottom">
+                        <div class="fadeinable">
+                            <div class="pos-rel">
+                                <img src="assets/image/avatar/avatar4.jpg" width="42"
+                                     class="radius-round float-left mx-2 border-2 px-1px brc-secondary-m2"/>
+                                <span class="bgc-success-tp2 radius-round border-2 brc-white p-1 position-tr mr-1"></span>
+                            </div>
+                        </div>
+
+                        <div class="fadeable hideable w-100 bg-transparent shadow-none border-0">
+                            <div id="sidebar-footer-bg"
+                                 class="bgc-white d-flex align-items-center shadow-sm mx-2 mt-2px py-2 radius-t-1 border-1 border-t-2 border-b-0 brc-primary-m3">
+
+
+                                <a href="#" class="btn btn-outline-blue border-0 p-2 mr-2px ml-4" title="Settings"
+                                   data-toggle="modal" data-target="#id-ace-settings-modal">
+                                    <i class="fa fa-cog text-150"></i>
+                                </a>
+
+                                <a href="html/page-login.html" class="btn btn-outline-warning border-0 p-2 mr-1"
+                                   title="Logout">
+                                    <i class="fa fa-sign-out-alt text-150"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div><!-- /#sidebar -->
+
+    <div class="main-container content-bg1">
+        <div role="main" class="main-content">
+        {% block body %}
+
+
+        {% endblock %}
+        {% block footer %}
+            <footer class="footer">
+                <div class="footer-inner">
+                    <div class="h-100 pt-3 border-1 brc-default-l1 bgc-white-tp1 shadow-md">
+                        <span class="text-primary-m2 font-bolder text-120">iBanFirst</span>
+                        <span class="text-muted">Application &copy; 2020</span>
+                        <span class="mx-3 action-buttons"></span>
+                    </div>
+                </div><!-- .footer-inner -->
+            </footer>
+
+            <div class="footer-tools">
+                <a id="btn-scroll-up" href="#" class="btn-scroll-up btn btn-green btn-smd radius-1 mb-2 mr-2">
+                    <i class="fa fa-angle-double-up w-2 h-2"></i>
+                </a>
+            </div>
+        {% endblock %}
+        </div>
+    </div>
+</div>
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/popper.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap-table.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/chart.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.basictable.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/ace.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/demo.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/menu.js') }}"></script>
+
+{% endblock %}
+</body>
+</html>
