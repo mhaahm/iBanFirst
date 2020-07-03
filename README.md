@@ -10,8 +10,3 @@ git clone https://github.com/mhaahm/iBanFirst.git <br>
 
 2.	Configuration
 
-***
-Dell_PC@DESKTOP-K6IFFV5 MSYS /d/DEV/PHP/iBanFirst (master)
-$ php composer.phar install
-
-***
