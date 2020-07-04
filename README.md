@@ -38,3 +38,6 @@ To run application
  - Open an umulator console (git bach or cmder ....)
     in the application directory.
  - Run php -S localhost:8000 -t public/
+ 
+ open the application in a browser
+ 
