@@ -85,7 +85,7 @@ class StatsServices
         ];
         $wallets = $this->walletRepository->findAll();
         if (!count($wallets)) {
-            return null;
+            return [];
         }
         /**
          * @var Wallet $wallet
