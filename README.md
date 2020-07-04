@@ -38,3 +38,13 @@ To run application
  - Open an umulator console (git bach or cmder ....)
     in the application directory.
  - Run php -S localhost:8000 -t public/
+ 
+<pre>
+<code>
+public function setUp()
+    {
+        self::bootKernel();
+        $this->repository = self::$container->get('wallet_repository');
+    }
+</code>
+</pre> 
