@@ -35,5 +35,21 @@ class ToolsTest extends WebTestCase
         $this->assertTrue(count($data) == 0);
     }
 
+    public function testBuildWsseHeader()
+    {
+        $header = $this->tools->buildWsseHeader();
+        $this->assertTrue(count($header) > 0,"The header is not valid");
+        $this->assertRegExp("/^X-WSSE: UsernameToken Username/",$header[0],"The header content is not valid");
+        $this->assertRegExp("/^Content-Type: application\/json$/",$header[1],"The header content is not valid");
+    }
+
+    public function testGetCurrencyRates()
+    {
+        $currencys = $this->tools->getCurrencyRates();
+        dump($currencys);
+        $this->assertTrue(count($currencys) > 0 , "Currency not valid");
+
+    }
+
 
 }

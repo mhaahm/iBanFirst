@@ -43,3 +43,8 @@ services:
        class: App\Repository\FinancialMouvmentsRepository
        arguments: ["@tools_service","@parameter_bag","@monolog.logger","@wallet_repository"]
        public: true
+
+    excel_services:
+        class: App\Services\ExcelService
+        arguments: ["@translator.default"]
+        public: true
